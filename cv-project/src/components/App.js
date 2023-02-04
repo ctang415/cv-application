@@ -1,4 +1,7 @@
 import React from 'react'
+import Education from './Education'
+import Work from './Work'
+import { v4 as uuid } from 'uuid'
 
 class App extends React.Component {
   constructor(props) {
@@ -13,25 +16,28 @@ class App extends React.Component {
         address: '',
       },
       objective: '',
-      work: {
+      work: [{
         role: '',
         company: '',
         duration: '',
         location: '',
         description: '',
-      },
-      education: {
+        key: uuid()
+      }],
+      education: [{
         school: '',
         place: '',
         time: '',
         degree: '',
         achievement: '',
-      },
+        key: uuid()
+      }],
       skills: '',
       edit: true,
-      workArr: [],
-      educationArr: [],
     }
+    this.handleChange = this.handleChange.bind(this)
+    this.addToEducation = this.addToEducation.bind(this)
+    this.addToWork = this.addToWork.bind(this)
   }
 
   handleChange = (e) => {
@@ -40,16 +46,21 @@ class App extends React.Component {
   }
 
   addToWork = (e) => {
-    let newArray = this.state.workArr.concat()
+    e.preventDefault()
     this.setState({
-      workArr: newArray
+      work: [...this.state.work, {
+        role: '', company: '', duration: '', location: '', description: '', key: uuid()
+      }]
     })
   }
 
   addToEducation = (e) => {
-    let newArray = this.state.educationArr.concat()
+    e.preventDefault()
     this.setState({
-      educationArr: newArray
+      education: [...this.state.education, {
+        school: '', place: '', time: '', degree: '', achievement: '', key: uuid()
+      }
+    ]
     })
   }
 
@@ -60,10 +71,11 @@ class App extends React.Component {
   }
 
   render() {
-    const { profile, objective, work, education, skills, edit } = this.state
+    const { education, edit, work, } = this.state
     if(edit) {
       return (
         <div>
+          <h1>CV Generator</h1>
           <form onSubmit={this.handleChange}>
             <button type="submit">View</button>
             <div>
@@ -79,19 +91,19 @@ class App extends React.Component {
             </div>
             <div>
               <h2>Work Experience</h2>
-              <input type="text" placeholder="Role" name="role" onChange={this.handleChange}></input>
-              <input type="text" placeholder="Company" name="company" onChange={this.handleChange}></input>
-              <input type="text" placeholder="Duration" name="duration" onChange={this.handleChange}></input>
-              <input type="text" placeholder="Location" name="location" onChange={this.handleChange}></input>
-              <input type="text" placeholder="Description" name="description" onChange={this.handleChange}></input>
+              <Work
+              work={work}
+              handleChange={this.handleChange}
+              addToWork={this.addToWork}
+              />
             </div>
             <div>
               <h2>Education</h2>
-              <input type="text" placeholder="School" name="school" onChange={this.handleChange}></input>
-              <input type="text" placeholder="Location" name="place" onChange={this.handleChange}></input>
-              <input type="text" placeholder="Duration" name="time" onChange={this.handleChange}></input>
-              <input type="text" placeholder="Degree" name="degree" onChange={this.handleChange}></input>
-              <input type="text" placeholder="Achievements" name="achievement" onChange={this.handleChange}></input>
+              <Education
+              education={education}
+              handleChange={this.handleChange}
+              addToEducation={this.addToEducation}
+              />
             </div>
             <div>
               <h2>Skills</h2>
@@ -103,6 +115,7 @@ class App extends React.Component {
     }
     return (
       <div>
+        <h1>CV Generator</h1>
         <button onClick={this.swapToEdit}>Return</button>
       </div>
     )
