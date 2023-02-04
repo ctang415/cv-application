@@ -37,7 +37,9 @@ class App extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.addToEducation = this.addToEducation.bind(this)
+    this.removeFromEducation = this.removeFromEducation.bind(this)
     this.addToWork = this.addToWork.bind(this)
+    this.removeFromWork = this.removeFromWork.bind(this)
   }
 
   handleChange = (e) => {
@@ -61,6 +63,24 @@ class App extends React.Component {
         school: '', place: '', time: '', degree: '', achievement: '', key: uuid()
       }
     ]
+    })
+  }
+
+  removeFromWork = (e) => {
+    e.preventDefault()
+    const key = e.target.parentNode.id
+    let filteredArray = this.state.work.filter(work => work.key !== key)
+    this.setState({
+      work: filteredArray
+    })
+  }
+
+  removeFromEducation = (e) => {
+    e.preventDefault()
+    const key = e.target.parentNode.id
+    let filteredArray = this.state.education.filter(education => education.key !== key)
+    this.setState({
+      education: filteredArray
     })
   }
 
@@ -95,6 +115,7 @@ class App extends React.Component {
               work={work}
               handleChange={this.handleChange}
               addToWork={this.addToWork}
+              removeFromWork={this.removeFromWork}
               />
             </div>
             <div>
@@ -103,6 +124,7 @@ class App extends React.Component {
               education={education}
               handleChange={this.handleChange}
               addToEducation={this.addToEducation}
+              removeFromEducation={this.removeFromEducation}
               />
             </div>
             <div>
