@@ -108,27 +108,36 @@ class App extends React.Component {
       return (
         <div className='template'>
           <div className='header'>
-            <h2>EZ CV</h2>
+            EZ CV
           </div>
           <form onSubmit={this.swapToView}>
-            <button type="submit">View</button>
-            <h2>Basic Information</h2>
+            <div className='button'>
+            <button type="submit" id="submit">View</button>
+            </div>
             <div className='information'>
+            <h2>Basic Information</h2>
               <div className='row'>
               <div className='columnone'>
               <input type="text" placeholder="Full Name" name="name" onChange={this.handleChange}></input>
               <input type="text" placeholder="Phone Number" name="number" onChange={this.handleChange}></input>
-              <input type="text" placeholder="Website" name="website" onChange={this.handleChange}></input>
               </div>
               <div className='columntwo'>
               <input type="text" placeholder="Email" name="email" onChange={this.handleChange}></input>
               <input type="text" placeholder="Location" name="address" onChange={this.handleChange}></input>
-              <input type="text" placeholder="Objective statement" name="objective" onChange={this.handleChange}></input>
               </div>
+              </div>
+              <div className='box'>
+              <input type="text" placeholder="Website" name="website" onChange={this.handleChange}></input>
               </div>
             </div>
+              <div className='information'>
+              <h2>Objective</h2>
+              <div>
+              <textarea rows="4" placeholder="Objective statement" name="objective" onChange={this.handleChange}></textarea>
+              </div>
+              </div>
+            <div className='information'>
             <h2>Work Experience</h2>
-            <div className='work'>
               <Work
               work={work}
               handleChange={this.handleChange}
@@ -136,8 +145,8 @@ class App extends React.Component {
               removeFromWork={this.removeFromWork}
               />
             </div>
+            <div className='information'>
             <h2>Education</h2>
-            <div className='education'>
               <Education
               education={education}
               handleChange={this.handleChange}
@@ -145,10 +154,13 @@ class App extends React.Component {
               removeFromEducation={this.removeFromEducation}
               />
             </div>
+            <div className='information'>
             <h2>Skills</h2>
-            <div className='skills'>
+            <div className='box'>
               <input type="text" placeholder="Skills" name="skills" onChange={this.handleChange}></input>
             </div>
+            </div>
+     
             </form>
           </div>
       );

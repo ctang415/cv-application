@@ -11,7 +11,7 @@ const Education = (props) => {
         education.map(education => 
         <div key={education.key} id={education.key} className='information'>
             <div id={education.key}>
-                <button onClick={addToEducation}>+</button><button onClick={removeFromEducation}>-</button>
+                <button className="add" onClick={addToEducation}>+</button><button className="remove" onClick={removeFromEducation}>-</button>
             </div>
             <div className="row">
             <div className="columnone">
@@ -24,8 +24,8 @@ const Education = (props) => {
             </div>
             </div>
             <div>
-                <input type="text" placeholder="Achievements" name="achievement" onChange={handleChange}></input>
-            </div>
+                <textarea rows="2" placeholder="Achievements" name="achievement" onChange={handleChange}></textarea>
+        </div>
         </div>
         )
     )

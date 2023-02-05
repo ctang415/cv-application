@@ -13,7 +13,7 @@ const Work = (props) => {
         work.map((work) => 
         <div key={work.key} id={work.key} className="information">
             <div id={work.key}>
-                <button onClick={addToWork}>+</button><button onClick={removeFromWork}>-</button>
+                <button className="add" onClick={addToWork}>+</button><button className="remove" onClick={removeFromWork}>-</button>
             </div>
             <div className="row">
             <div className="columnone">
@@ -25,9 +25,9 @@ const Work = (props) => {
                 <input type="text" placeholder="Location" name="location" onChange={handleChange}></input>
             </div>
             </div>
-            <div>
+            <div className="box">
                 <input type="text" placeholder="Description" name="description" onChange={handleChange}></input>
-            </div>
+        </div>
         </div>
         )
     )

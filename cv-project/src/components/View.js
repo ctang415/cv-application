@@ -4,9 +4,13 @@ const View = (props) => {
     const {swapToEdit} = props
     return (
         <div>
-        <h1>EZ Generator</h1>
-        <button onClick={swapToEdit}>Back to Edit</button>
-      </div>
+            <div className="header">
+                EZ CV
+                <div className="button">
+                    <button onClick={swapToEdit}>Back to Edit</button>
+                </div>
+            </div>
+        </div>
     )
 }
 
