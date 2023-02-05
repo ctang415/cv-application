@@ -1,6 +1,8 @@
 import React from 'react'
 import Education from './Education'
 import Work from './Work'
+import View from './View'
+import './styles/App.css'
 import { v4 as uuid } from 'uuid'
 
 class App extends React.Component {
@@ -40,11 +42,13 @@ class App extends React.Component {
     this.removeFromEducation = this.removeFromEducation.bind(this)
     this.addToWork = this.addToWork.bind(this)
     this.removeFromWork = this.removeFromWork.bind(this)
+    this.swapToEdit= this.swapToEdit.bind(this)
+    this.swapToView = this.swapToView.bind(this)
   }
 
   handleChange = (e) => {
     e.preventDefault()
-    this.setState({...this.state, [e.target.name]: e.target.value, edit: false})
+    this.setState({...this.state, [e.target.name]: e.target.value})
   }
 
   addToWork = (e) => {
@@ -84,33 +88,47 @@ class App extends React.Component {
     })
   }
 
-  swapToEdit = () => {
+  swapToEdit = (e) => {
+    e.preventDefault()
     this.setState({
       edit: true
     })
   }
 
+  swapToView = (e) => {
+    e.preventDefault()
+    this.setState({
+      edit: false
+    })
+  }
+
   render() {
-    const { education, edit, work, } = this.state
-    if(edit) {
+    const { education, edit, work } = this.state
+    if (edit) {
       return (
-        <div>
-          <h1>CV Generator</h1>
-          <form onSubmit={this.handleChange}>
+        <div className='template'>
+          <div className='header'>
+            <h2>EZ CV</h2>
+          </div>
+          <form onSubmit={this.swapToView}>
             <button type="submit">View</button>
-            <div>
-              <h2>Basic Information</h2>
+            <h2>Basic Information</h2>
+            <div className='information'>
+              <div className='row'>
+              <div className='columnone'>
               <input type="text" placeholder="Full Name" name="name" onChange={this.handleChange}></input>
               <input type="text" placeholder="Phone Number" name="number" onChange={this.handleChange}></input>
               <input type="text" placeholder="Website" name="website" onChange={this.handleChange}></input>
+              </div>
+              <div className='columntwo'>
               <input type="text" placeholder="Email" name="email" onChange={this.handleChange}></input>
               <input type="text" placeholder="Location" name="address" onChange={this.handleChange}></input>
+              <input type="text" placeholder="Objective statement" name="objective" onChange={this.handleChange}></input>
+              </div>
+              </div>
             </div>
-            <div>
-              <input type="text" placeholder="Objective" name="objective" onChange={this.handleChange}></input>
-            </div>
-            <div>
-              <h2>Work Experience</h2>
+            <h2>Work Experience</h2>
+            <div className='work'>
               <Work
               work={work}
               handleChange={this.handleChange}
@@ -118,8 +136,8 @@ class App extends React.Component {
               removeFromWork={this.removeFromWork}
               />
             </div>
-            <div>
-              <h2>Education</h2>
+            <h2>Education</h2>
+            <div className='education'>
               <Education
               education={education}
               handleChange={this.handleChange}
@@ -127,19 +145,18 @@ class App extends React.Component {
               removeFromEducation={this.removeFromEducation}
               />
             </div>
-            <div>
-              <h2>Skills</h2>
+            <h2>Skills</h2>
+            <div className='skills'>
               <input type="text" placeholder="Skills" name="skills" onChange={this.handleChange}></input>
             </div>
-          </form>
-        </div>
+            </form>
+          </div>
       );
     }
     return (
-      <div>
-        <h1>CV Generator</h1>
-        <button onClick={this.swapToEdit}>Return</button>
-      </div>
+      <View
+      swapToEdit={this.swapToEdit}
+      />
     )
   }
 }
