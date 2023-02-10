@@ -1,19 +1,12 @@
 import React from "react";
 
 const Work = (props) => {
-    const { handleChangeWork, addToWork, workArray, removeFromWork } = props
-    if (workArray.length === 0) {
-        return (
-        <div>
-            <button onClick={addToWork}>+</button>
-        </div>
-        )
-    }
+    const { handleChangeWork, work, addToWork, workArray, removeFromWork } = props
     return (
         workArray.map((work) => 
         <div key={work.key} id={work.key} className="information">
             <div id={work.key}>
-                <button className="add" onClick={addToWork}>+</button><button className="remove" onClick={removeFromWork}>-</button>
+                <button className="remove" onClick={removeFromWork}>-</button>
             </div>
             <div className="row">
             <div className="columnone">

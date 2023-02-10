@@ -7,7 +7,7 @@ const EducationView = (props) => {
             {educationArray.map((education) => {
                 return (
                 <div key={education.key} id={education.key}>
-                    <div className="education">
+                    <div className="education" id={education.key}>
                         {education.school}
                         {education.place}
                         {education.time}

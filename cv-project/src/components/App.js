@@ -5,6 +5,7 @@ import View from './View'
 import './styles/App.css'
 import { v4 as uuid } from 'uuid'
 
+
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -43,18 +44,13 @@ class App extends React.Component {
       achievement: '',
       key: uuid()
     },
-    educationArray: [{
-      school: '',
-      place: '',
-      time: '',
-      degree: '',
-      achievement: '',
-      key: uuid()
-    }],
+    educationArray: [],
     skill: {
       skills: '',
     },
     edit: true,
+    editEdu: false,
+    editWork: false,
   }
 
     this.addToEducation = this.addToEducation.bind(this)
@@ -65,6 +61,7 @@ class App extends React.Component {
     this.swapToView = this.swapToView.bind(this)
     this.handleChangeEducation = this.handleChangeEducation.bind(this)
     this.handleChangeWork = this.handleChangeWork.bind(this)
+    this.handleChangeEducationEdit = this.handleChangeEducationEdit.bind(this)
   }
 
 
@@ -78,23 +75,53 @@ class App extends React.Component {
   handleChangeProfile = (e) => {
     e.preventDefault()
     this.setState({ profile: {
-      ...this.state.profile, [e.target.name]: e.target.value
+      ...this.state.profile, [e.target.name]: e.target.value,
     }
     })
   }
-
+/*
   handleChangeEducation = (e) => {
     e.preventDefault()
-    this.setState({ education: {
-      ...this.state.education, [e.target.name]: e.target.value
-    }
+    this.setState({ education: {...this.state.education, [e.target.name]: e.target.value,
+      }
     })
   }
+*/
+
+handleChangeEducation = (e, index) => {
+  e.preventDefault()
+  this.setState(prevState => {
+    return {
+      educationArray: [
+        ...prevState.educationArray.slice(0, index), 
+        {...prevState.educationArray[index], [e.target.name]: e.target.value},
+        ...prevState.educationArray.slice(index + 1)
+     ]
+    }
+    }
+  )
+}
+
+
+handleChangeEducationEdit = (e) => {
+  const input = e.target.parentNode.querySelector('input')
+  let newArray = this.state.educationArray.map((item) => {
+    if (item.key === e.target.parentNode.id) {
+      let x = item.find((x) => x === e.target.name) 
+      x = input.value
+    }
+    return item
+  })
+  this.setState({
+    educationArray: newArray
+  })
+}
 
   handleChangeWork = (e) => {
     e.preventDefault()
-    this.setState({ work: {
-      ...this.state.work, [e.target.name]: e.target.value
+    this.setState({ 
+      work: {...this.state.work, [e.target.name]: e.target.value,
+      key: this.state.work.key
     }
     })
   }
@@ -120,13 +147,14 @@ addToWork = (e) => {
       key: uuid()
     }
   })
+  console.log(this.state.educationArray)
 }
 
   addToEducation = (e) => {
     e.preventDefault()
     this.setState({
-      educationArray: this.state.educationArray.concat(this.state.education),
-      education: {
+      educationArray: [...this.state.educationArray,
+      {
         school: '',
         place: '',
         time: '',
@@ -134,6 +162,7 @@ addToWork = (e) => {
         achievement: '',
         key: uuid()
       }
+    ]
     })
   }
 
@@ -158,26 +187,27 @@ addToWork = (e) => {
   swapToEdit = (e) => {
     e.preventDefault()
     this.setState({
-      edit: true
+      edit: true,
+      editEdu: true
     })
   }
 
   swapToView = (e) => {
     e.preventDefault()
-    this.setState({ 
+    this.setState({
       edit: false,
     })
   }
 
   render() {
-    const { education, edit, work, profile, skill, educationArray, workArray, } = this.state
+    const { edit, editEdu, profile, work, skill, educationArray, workArray, } = this.state
     if (edit) {
       return (
         <div className='template'>
           <div className='header'>
             <span>EZ CV</span>
           </div>
-          <form onSubmit={this.swapToView}>
+          <form ref={this.formRef} onSubmit={this.swapToView}>
             <div className='button'>
             <button type="submit" id="submit">View</button>
             </div>
@@ -205,6 +235,9 @@ addToWork = (e) => {
               </div>
             <div className='information'>
             <h2>Work Experience</h2>
+            <div>
+            <button className='add' onClick={this.addToWork}>+</button>
+            </div>
               <Work
               work={work}
               workArray={workArray}
@@ -215,9 +248,13 @@ addToWork = (e) => {
             </div>
             <div className='information'>
             <h2>Education</h2>
+            <div>
+            <button className="add" onClick={this.addToEducation}>+</button>
+            </div>
               <Education
-              education={education}
+              editEdu={editEdu}
               educationArray={educationArray}
+              handleChangeEducationEdit={this.handleChangeEducationEdit}
               handleChangeEducation={this.handleChangeEducation}
               addToEducation={this.addToEducation}
               removeFromEducation={this.removeFromEducation}
@@ -243,8 +280,6 @@ addToWork = (e) => {
       website={this.state.profile.website}
       key={this.state.profile.key}
       profile={profile}
-      education={education}
-      work={work}
       workArray={workArray}
       educationArray={educationArray}
       skill={skill}

@@ -12,7 +12,7 @@ const ProfileView = (props) => {
             <ul>
                 <li>{profile.email}</li>
                 <li>{profile.number}</li>
-                <li>{profile.location}</li>
+                <li>{profile.address}</li>
                 <li>{profile.website}</li>
             </ul>
             </div>
