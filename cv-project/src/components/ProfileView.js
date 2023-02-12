@@ -4,7 +4,7 @@ const ProfileView = (props) => {
     let {profile } = props
         return (
             <div>
-            <div key={profile.key} id={profile.key}>
+            <div key={profile.id} id={profile.id}>
             <div className="fullname">
             <span className="headername">{profile.name}</span>
             </div>
@@ -17,8 +17,12 @@ const ProfileView = (props) => {
             </ul>
             </div>
             <div className="summary">
+                <div className="underline">
                 <span className="headertext">Objective</span>
+                </div>
+                <div className="text">
                 {profile.objective}
+                </div>
                 </div>
             </div>
         </div>

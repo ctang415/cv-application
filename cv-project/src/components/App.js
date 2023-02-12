@@ -18,7 +18,7 @@ class App extends React.Component {
       email: '',
       address: '',
       objective: '',
-      key: uuid(),
+      id: uuid(),
       },
     work: {
       role: '',
@@ -26,7 +26,7 @@ class App extends React.Component {
       duration: '',
       location: '',
       description: '',
-      key: uuid()
+      id: uuid()
     },
     workArray: [{
       role: '', 
@@ -34,7 +34,7 @@ class App extends React.Component {
       duration: '', 
       location: '', 
       description: '', 
-      key: uuid()
+      id: uuid()
     }],
     education: {
       school: '',
@@ -42,15 +42,21 @@ class App extends React.Component {
       time: '',
       degree: '',
       achievement: '',
-      key: uuid()
+      id: uuid()
     },
-    educationArray: [],
+    educationArray: [{
+      school: '',
+      place: '',
+      time: '',
+      degree: '',
+      achievement: '',
+      id: uuid()
+    }],
     skill: {
       skills: '',
+      id: uuid()
     },
     edit: true,
-    editEdu: false,
-    editWork: false,
   }
 
     this.addToEducation = this.addToEducation.bind(this)
@@ -59,17 +65,16 @@ class App extends React.Component {
     this.removeFromWork = this.removeFromWork.bind(this)
     this.swapToEdit= this.swapToEdit.bind(this)
     this.swapToView = this.swapToView.bind(this)
-    this.handleChangeEducation = this.handleChangeEducation.bind(this)
-    this.handleChangeWork = this.handleChangeWork.bind(this)
-    this.handleChangeEducationEdit = this.handleChangeEducationEdit.bind(this)
-  }
-
-
-  handleChange = (e) => {
-    e.preventDefault()
-    this.setState({...this.state,
-      [e.target.name]: e.target.value
-    })
+    this.handleChangeEducationSchool = this.handleChangeEducationSchool.bind(this)
+    this.handleChangeEducationAchievement = this.handleChangeEducationAchievement.bind(this)
+    this.handleChangeEducationDegree = this.handleChangeEducationDegree.bind(this)
+    this.handleChangeEducationPlace = this.handleChangeEducationPlace.bind(this)
+    this.handleChangeEducationTime = this.handleChangeEducationTime.bind(this)
+    this.handleChangeWorkRole = this.handleChangeWorkRole.bind(this)
+    this.handleChangeWorkCompany = this.handleChangeWorkCompany.bind(this)
+    this.handleChangeWorkDuration = this.handleChangeWorkDuration.bind(this)
+    this.handleChangeWorkLocation = this.handleChangeWorkLocation.bind(this)
+    this.handleChangeWorkDescription = this.handleChangeWorkDescription.bind(this)
   }
 
   handleChangeProfile = (e) => {
@@ -79,51 +84,148 @@ class App extends React.Component {
     }
     })
   }
-/*
-  handleChangeEducation = (e) => {
-    e.preventDefault()
-    this.setState({ education: {...this.state.education, [e.target.name]: e.target.value,
+
+  handleChangeEducationTime = (e) => {
+    const input = e.target.parentNode.querySelector('input')
+    let newArray = this.state.educationArray.map((item) => {
+      if (item.id === e.target.parentNode.id) {
+        item.time = input.value
       }
+      return item
+    })
+    this.setState({
+      educationArray: newArray
     })
   }
-*/
-
-handleChangeEducation = (e, index) => {
-  e.preventDefault()
-  this.setState(prevState => {
-    return {
-      educationArray: [
-        ...prevState.educationArray.slice(0, index), 
-        {...prevState.educationArray[index], [e.target.name]: e.target.value},
-        ...prevState.educationArray.slice(index + 1)
-     ]
-    }
-    }
-  )
-}
 
 
-handleChangeEducationEdit = (e) => {
-  const input = e.target.parentNode.querySelector('input')
-  let newArray = this.state.educationArray.map((item) => {
-    if (item.key === e.target.parentNode.id) {
-      let x = item.find((x) => x === e.target.name) 
-      x = input.value
-    }
-    return item
-  })
-  this.setState({
-    educationArray: newArray
-  })
-}
 
-  handleChangeWork = (e) => {
-    e.preventDefault()
-    this.setState({ 
-      work: {...this.state.work, [e.target.name]: e.target.value,
-      key: this.state.work.key
-    }
+  handleChangeEducationDegree= (e) => {
+    const input = e.target.parentNode.querySelectorAll('input')[1]
+    let newArray = this.state.educationArray.map((item) => {
+      if (item.id === e.target.parentNode.id) {
+        item.degree = input.value
+      }
+      return item
     })
+    this.setState({
+      educationArray: newArray
+    })
+  }
+
+
+  handleChangeEducationAchievement = (e) => {
+    const input = e.target.parentNode.querySelector('textarea')
+    let newArray = this.state.educationArray.map((item) => {
+      if (item.id === e.target.parentNode.id) {
+        item.achievement = input.value
+      }
+      return item
+    })
+    this.setState({
+      educationArray: newArray
+    })
+  }
+
+  handleChangeEducationPlace = (e) => {
+    const input = e.target.parentNode.querySelectorAll('input')[1]
+    let newArray = this.state.educationArray.map((item) => {
+      if (item.id === e.target.parentNode.id) {
+        item.place = input.value
+      }
+      return item
+    })
+    this.setState({
+      educationArray: newArray
+    })
+  }
+
+  handleChangeEducationSchool = (e) => {
+    const input = e.target.parentNode.querySelector('input')
+    let newArray = this.state.educationArray.map((item) => {
+      if (item.id === e.target.parentNode.id) {
+        item.school = input.value
+      }
+      return item
+    })
+    this.setState({
+      educationArray: newArray
+    })
+  }
+
+  handleChangeWorkRole = (e) => {
+    const input = e.target.parentNode.querySelector('input')
+    let newArray = this.state.workArray.map((item) => {
+      if (item.id === e.target.parentNode.id) {
+        item.role = input.value
+      }
+      return item
+    })
+    this.setState({
+      workArray: newArray
+    })
+  }
+
+  handleChangeWorkCompany = (e) => {
+    const input = e.target.parentNode.querySelectorAll('input')[1]
+    let newArray = this.state.workArray.map((item) => {
+      if (item.id === e.target.parentNode.id) {
+        item.company = input.value
+      }
+      return item
+    })
+    this.setState({
+      workArray: newArray
+    })
+  }
+
+  handleChangeWorkDuration = (e) => {
+    const input = e.target.parentNode.querySelector('input')
+    let newArray = this.state.workArray.map((item) => {
+      if (item.id === e.target.parentNode.id) {
+        item.duration = input.value
+      }
+      return item
+    })
+    this.setState({
+      workArray: newArray
+    })
+  }
+
+  handleChangeWorkLocation = (e) => {
+    const input = e.target.parentNode.querySelectorAll('input')[1]
+    let newArray = this.state.workArray.map((item) => {
+      if (item.id === e.target.parentNode.id) {
+        item.location = input.value
+      }
+      return item
+    })
+    this.setState({
+      workArray: newArray
+    })
+  }
+
+  handleChangeWorkDescription = (e) => {
+    const input = e.target.parentNode.querySelector('textarea')
+    let newArray = this.state.workArray.map((item) => {
+      if (item.id === e.target.parentNode.id) {
+        item.description = input.value
+      }
+      return item
+    })
+    this.setState({
+      workArray: newArray
+    })
+  }
+
+  onKeyDown(e) {
+    console.log(e.keyCode);
+    if (e.keyCode ===13) {
+      console.log(this.refs.text.value);
+      this.refs.text.value = `${this.refs.text.value}\n${this.state.counter++}. `;
+      e.preventDefault();
+      e.stopPropagation();
+    }
   }
 
   handleChangeSkill = (e) => {
@@ -144,10 +246,9 @@ addToWork = (e) => {
       duration: '', 
       location: '', 
       description: '', 
-      key: uuid()
+      id: uuid()
     }
   })
-  console.log(this.state.educationArray)
 }
 
   addToEducation = (e) => {
@@ -160,7 +261,7 @@ addToWork = (e) => {
         time: '',
         degree: '',
         achievement: '',
-        key: uuid()
+        id: uuid()
       }
     ]
     })
@@ -169,7 +270,7 @@ addToWork = (e) => {
   removeFromWork = (e) => {
     e.preventDefault()
     const key = e.target.parentNode.id
-    let filteredArray = this.state.workArray.filter(work => work.key !== key)
+    let filteredArray = this.state.workArray.filter(work => work.id !== key)
     this.setState({
       workArray: filteredArray
     })
@@ -178,7 +279,7 @@ addToWork = (e) => {
   removeFromEducation = (e) => {
     e.preventDefault()
     const key = e.target.parentNode.id
-    let filteredArray = this.state.educationArray.filter(education => education.key !== key)
+    let filteredArray = this.state.educationArray.filter(education => education.id !== key)
     this.setState({
       educationArray: filteredArray
     })
@@ -224,7 +325,7 @@ addToWork = (e) => {
               </div>
               </div>
               <div id="boxes" className='box'>
-              <input type="text" placeholder="Website" name="website" defaultValue={profile.website} onChange={this.handleChangeProfile}></input>
+              <input type="text" placeholder="Website" name="website" maxLength="25" defaultValue={profile.website} onChange={this.handleChangeProfile}></input>
               </div>
             </div>
               <div className='information'>
@@ -241,7 +342,11 @@ addToWork = (e) => {
               <Work
               work={work}
               workArray={workArray}
-              handleChangeWork={this.handleChangeWork}
+              handleChangeWorkRole={this.handleChangeWorkRole}
+              handleChangeWorkCompany={this.handleChangeWorkCompany}
+              handleChangeWorkDuration={this.handleChangeWorkDuration}
+              handleChangeWorkLocation={this.handleChangeWorkLocation}
+              handleChangeWorkDescription={this.handleChangeWorkDescription}
               addToWork={this.addToWork}
               removeFromWork={this.removeFromWork}
               />
@@ -252,10 +357,13 @@ addToWork = (e) => {
             <button className="add" onClick={this.addToEducation}>+</button>
             </div>
               <Education
+              handleChangeEducationSchool={this.handleChangeEducationSchool}
+              handleChangeEducationAchievement={this.handleChangeEducationAchievement}
+              handleChangeEducationDegree={this.handleChangeEducationDegree}
+              handleChangeEducationPlace={this.handleChangeEducationPlace}
+              handleChangeEducationTime={this.handleChangeEducationTime}
               editEdu={editEdu}
               educationArray={educationArray}
-              handleChangeEducationEdit={this.handleChangeEducationEdit}
-              handleChangeEducation={this.handleChangeEducation}
               addToEducation={this.addToEducation}
               removeFromEducation={this.removeFromEducation}
               />
@@ -263,7 +371,7 @@ addToWork = (e) => {
             <div className='information'>
             <h2>Skills</h2>
             <div className='box' id="boxes">
-              <input type="text" placeholder="Skills" name="skills" onChange={this.handleChangeSkill}></input>
+              <input type="text" placeholder="Skills" name="skills" defaultValue={skill.skills} onChange={this.handleChangeSkill}></input>
             </div>
             </div>
      
@@ -272,6 +380,7 @@ addToWork = (e) => {
       );
     }
     return (
+      <div>
       <View
       name={this.state.profile.name}
       address={this.state.profile.address}
@@ -285,6 +394,7 @@ addToWork = (e) => {
       skill={skill}
       swapToEdit={this.swapToEdit}
       />
+      </div>
     )
   }
 }

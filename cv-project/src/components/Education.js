@@ -1,59 +1,29 @@
 import React from "react";
 
-
-
 const Education = (props) => {
-    let { handleChangeEducation, handleChangeEducationEdit, editEdu, educationArray, addToEducation, removeFromEducation } = props
-    if (editEdu === false) {
+    let { handleChangeEducationSchool, handleChangeEducationTime, handleChangeEducationPlace, handleChangeEducationDegree, handleChangeEducationAchievement, educationArray, removeFromEducation } = props
     return (
         educationArray.map((education) => 
-        <div key={education.key} id={education.key} className='information'>
-            <div id={education.key}>
+        <div key={education.id} id={education.id} className='information'>
+            <div id={education.id}>
                 <button className="remove" onClick={removeFromEducation}>-</button>
             </div>
             <div className="row">
-            <div className="columnone">
-                <input type="text" placeholder="School" name="school" defaultValue={education.school} onChange={handleChangeEducationEdit}></input>
-                <input type="text" placeholder="Location" name="place" defaultValue={education.place} onChange={handleChangeEducationEdit}></input>
+            <div className="columnone" id={education.id}>
+                <input type="text" placeholder="School" name="school" defaultValue={education.school} onChange={handleChangeEducationSchool}></input>
+                <input type="text" placeholder="Location" name="place" defaultValue={education.place} onChange={handleChangeEducationPlace}></input>
             </div>
-            <div className="columntwo">
-                <input type="text" placeholder="Duration" name="time" defaultValue={education.time} onChange={handleChangeEducationEdit}></input>
-                <input type="text" placeholder="Degree" name="degree" defaultValue={education.degree} onChange={handleChangeEducationEdit}></input>
+            <div className="columntwo" id={education.id}>
+                <input type="text" placeholder="Duration" name="time" defaultValue={education.time} onChange={handleChangeEducationTime}></input>
+                <input type="text" placeholder="Degree" name="degree" defaultValue={education.degree} onChange={handleChangeEducationDegree}></input>
             </div>
             </div>
-            <div>
-                <textarea rows="2" placeholder="Achievements" name="achievement" defaultValue={education.achievement} onChange={handleChangeEducationEdit}></textarea>
+            <div id={education.id}>
+                <textarea rows="2" placeholder="Achievements" name="achievement" defaultValue={education.achievement} onChange={handleChangeEducationAchievement}></textarea>
         </div>
         </div>
     )
-    )}     if (educationArray.length === 0) {
-    return (
-        <div><button onClick={addToEducation}>+</button></div>
     )
-} else {
-return (
-    educationArray.map((education) => 
-    <div key={education.key} id={education.key} className='information'>
-        <div id={education.key}>
-            <button className="remove" onClick={removeFromEducation}>-</button>
-        </div>
-        <div className="row">
-        <div className="columnone">
-            <input type="text" placeholder="School" name="school" defaultValue={education.school} onChange={handleChangeEducationEdit}></input>
-            <input type="text" placeholder="Location" name="place" defaultValue={education.place} onChange={handleChangeEducationEdit}></input>
-        </div>
-        <div className="columntwo">
-            <input type="text" placeholder="Duration" name="time" defaultValue={education.time} onChange={handleChangeEducationEdit}></input>
-            <input type="text" placeholder="Degree" name="degree" defaultValue={education.degree} onChange={handleChangeEducationEdit}></input>
-        </div>
-        </div>
-        <div>
-            <textarea rows="2" placeholder="Achievements" name="achievement" defaultValue={education.achievement} onChange={handleChangeEducationEdit}></textarea>
-    </div>
-    </div>
-)
-)
-}
  }
     
 
