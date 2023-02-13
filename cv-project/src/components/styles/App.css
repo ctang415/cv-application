@@ -118,7 +118,6 @@ button {
 
 .headertext {
   font-size: 3.5vh;
-
 }
 
 .underline {
@@ -167,4 +166,117 @@ button {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+@media only screen and (min-device-width:280px) and (max-device-width: 950px) {
+
+  body {
+    font-size: 1.55vh;
+  }
+
+  .resume {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    color: black;
+    width: 85vw;
+    min-height: 80vh;
+    margin: auto;
+    word-break: break-word;
+  }
+
+  #submit {
+    font-size: 3vw;
+    width: 15vw;
+    height: 8vw;
+  }
+
+  .header {
+    font-size: 5.5vh;
+  }
+
+  .information {
+    width: 40vh;
+    padding-bottom: 1vh;
+    margin-bottom: 2.5vh;
+    border-radius: 1vh;
+    background-color: rgb(130, 93, 118);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1vh;
+  }
+
+  .box > input {
+    width: 35vh;
+  }
+  
+  input {
+    border: none;
+    border-radius: 0.8vh;
+    width: 16vh;
+    padding: 0.5vh;
+  }
+
+  textarea {
+    resize:none;
+    width: 35.5vh;
+    border-radius: 0.8vh;
+  }
+
+  h2 {
+    margin-bottom: 1vh;
+  }
+
+  .headertext {
+    font-size: 2.2vh;
+  }
+
+  .headername {
+    font-size: 4.5vh;
+  }
+
+  .bold {
+    font-weight: bold;
+    font-size: 1.85vh;
+  }
+
+  .generalinfo > ul {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    list-style: none;
+    padding: 0;
+    margin-top: 1vh;
+    margin-left: 4vw;
+    margin-right: 4vw;
+    font-size: 1.3vh;
+  }
+
+.text {
+  margin-left: 3vw;
+  margin-right: 3vw;
+}
+
+.textbullets {
+  margin-left: 3vw;
+  margin-right: 3vw;
+  white-space: pre-line;
+}
+
+.fullname {
+  border-bottom: solid black 0.4vh;
+  margin-left: 2vw;
+  margin-right: 2vw;
+  padding-top: 2vh;
+}
+
+.skills, .education, .workexperience, .summary {
+  text-align: left;
+  margin-left: 2vw;
+  margin-right: 2vw;
+  padding-bottom: 1.5vw;
+  padding-top: 1vh;
+}
+
 }
