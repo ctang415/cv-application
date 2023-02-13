@@ -19,7 +19,7 @@ const Work = (props) => {
             </div>
             </div>
             <div className="box" id={work.id}>
-                <textarea rows="5" placeholder="Description" name="description" defaultValue={work.description} id="work" onChange={handleChangeWorkDescription}></textarea>
+                <textarea rows="5" placeholder="Description: Use enter key to create bullet points on display" name="description" defaultValue={work.description} id="work" onChange={handleChangeWorkDescription}></textarea>
         </div>
         </div>
         )

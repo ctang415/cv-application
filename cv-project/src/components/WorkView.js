@@ -12,7 +12,7 @@ const WorkView = (props) => {
                         <li className="bold">{work.role}</li>
                         <div className="split" id={work.id}><li>{work.company} - {work.location}</li> <li>{work.duration}</li></div>
                         </ul>
-                        <div id={work.id} className="text">{work.description}</div>
+                        <div id={work.id} className="textbullets">{`\u2022 ${work.description.replace(/\n/g, '\n \u2022 ')}`}</div>
                     </div>
                     </div>
             )

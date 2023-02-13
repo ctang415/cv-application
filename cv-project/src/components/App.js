@@ -218,16 +218,6 @@ class App extends React.Component {
     })
   }
 
-  onKeyDown(e) {
-    console.log(e.keyCode);
-    if (e.keyCode ===13) {
-      console.log(this.refs.text.value);
-      this.refs.text.value = `${this.refs.text.value}\n${this.state.counter++}. `;
-      e.preventDefault();
-      e.stopPropagation();
-    }
-  }
-
   handleChangeSkill = (e) => {
     e.preventDefault()
     this.setState({ skill: {
