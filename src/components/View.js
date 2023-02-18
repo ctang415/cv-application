@@ -4,8 +4,7 @@ import EducationView from "./EducationView";
 import WorkView from "./WorkView";
 import Skills from "./Skills";
 
-const View = (props) => {
-    let {swapToEdit, educationArray, workArray, profile, skill} = props
+const View = ({swapToEdit, educationArray, workArray, profile, skill}) => {
     return (
         <div className="cv">
             <div className="header">

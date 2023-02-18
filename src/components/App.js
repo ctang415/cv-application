@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Education from './Education'
 import Work from './Work'
 import View from './View'
@@ -6,6 +6,354 @@ import './styles/App.css'
 import { v4 as uuid } from 'uuid'
 
 
+const App = () => {
+
+  const [profile, setProfile] = useState({
+    name: '',
+    number:'',
+    website: '',
+    email: '',
+    address: '',
+    objective: '',
+  })
+
+  const [work, setWork] = useState({
+    role: '',
+    company: '',
+    duration: '',
+    location: '',
+    description: '',
+    id: uuid()
+  })
+
+  const [education, setEducation] = useState({
+    school: '',
+    place: '',
+    time: '',
+    degree: '',
+    achievement: '',
+    id: uuid()
+  })
+
+  const [educationArray, setEducationArray] = useState([{
+    school: '',
+    place: '',
+    time: '',
+    degree: '',
+    achievement: '',
+    id: ''
+  }])
+
+  const [workArray, setWorkArray] = useState([{
+    role: '',
+    company: '',
+    duration: '',
+    location: '',
+    description: '',
+    id: ''
+  }])
+
+  const [skill, setSkill] = useState({
+    skills: '',
+  })
+
+  const [edit, setEdit] = useState({edit: true})
+
+  const addToWork = () => {
+    setWorkArray(workArray => [...workArray, {
+      role: '',
+      company: '',
+      duration: '',
+      location: '',
+      description: '',
+      id: uuid()
+    }])
+  }
+
+  const addToEducation = () => {
+    setEducationArray(educationArray => [...educationArray, {
+      school: '',
+      place: '',
+      time: '',
+      degree: '',
+      achievement: '',
+      id: uuid()
+    }])
+  }
+
+  const removeFromEducation = (e) => {
+    const key = e.target.parentNode.id
+    setEducationArray(educationArray.filter(work => work.id !== key))
+  }
+
+  const removeFromWork = (e) => {
+    const key = e.target.parentNode.id
+    setWorkArray(workArray.filter(work => work.id !== key))
+  }
+
+  const swapToView = (e) => {
+    e.preventDefault()
+    setEdit({edit: false})
+  }
+
+  const swapToEdit = (e) => {
+    e.preventDefault()
+    setEdit({edit: true})
+  }
+
+  const handleChangeWorkDuration = (e) => {
+    const input = e.target.parentNode.querySelector('input')
+    let newArray = workArray.map((item) => {
+      if (item.id === e.target.parentNode.id) {
+        item.duration = input.value
+      }
+      return item
+    })
+    setWorkArray({
+      workArray: newArray
+    })
+  }
+
+  const handleChangeEducationTime = (e) => {
+    const input = e.target.parentNode.querySelector('input')
+    let newArray = educationArray.map((item) => {
+      if (item.id === e.target.parentNode.id) {
+        item.time = input.value
+      }
+      return item
+    })
+    setEducationArray({
+      educationArray: newArray
+    })
+  }
+
+  const handleChangeEducationDegree= (e) => {
+    const input = e.target.parentNode.querySelectorAll('input')[1]
+    let newArray = educationArray.map((item) => {
+      if (item.id === e.target.parentNode.id) {
+        item.degree = input.value
+      }
+      return item
+    })
+    setEducationArray({
+      educationArray: newArray
+    })
+  }
+
+
+  const handleChangeEducationAchievement = (e) => {
+    const input = e.target.parentNode.querySelector('textarea')
+    let newArray = educationArray.map((item) => {
+      if (item.id === e.target.parentNode.id) {
+        item.achievement = input.value
+      }
+      return item
+    })
+   setEducationArray({
+      educationArray: newArray
+    })
+  }
+
+  const handleChangeEducationPlace = (e) => {
+    const input = e.target.parentNode.querySelectorAll('input')[1]
+    let newArray = educationArray.map((item) => {
+      if (item.id === e.target.parentNode.id) {
+        item.place = input.value
+      }
+      return item
+    })
+    setEducationArray({
+      educationArray: newArray
+    })
+  }
+
+  const handleChangeEducationSchool = (e) => {
+    const input = e.target.parentNode.querySelector('input')
+    let newArray = educationArray.map((item) => {
+      if (item.id === e.target.parentNode.id) {
+        item.school = input.value
+      }
+      return item
+    })
+    setEducationArray({
+      educationArray: newArray
+    })
+  }
+
+  const handleChangeWorkRole = (e) => {
+    const input = e.target.parentNode.querySelector('input')
+    let newArray = workArray.map((item) => {
+      if (item.id === e.target.parentNode.id) {
+        item.role = input.value
+      }
+      return item
+    })
+    setWorkArray({
+      workArray: newArray
+    })
+  }
+
+  const handleChangeWorkCompany = (e) => {
+    const input = e.target.parentNode.querySelectorAll('input')[1]
+    let newArray = workArray.map((item) => {
+      if (item.id === e.target.parentNode.id) {
+        item.company = input.value
+      }
+      return item
+    })
+   setWorkArray({
+      workArray: newArray
+    })
+  }
+
+  const handleChangeWorkLocation = (e) => {
+    const input = e.target.parentNode.querySelectorAll('input')[1]
+    let newArray = workArray.map((item) => {
+      if (item.id === e.target.parentNode.id) {
+        item.location = input.value
+      }
+      return item
+    })
+    setWorkArray({
+      workArray: newArray
+    })
+  }
+
+  const handleChangeWorkDescription = (e) => {
+    const input = e.target.parentNode.querySelector('textarea')
+    let newArray = workArray.map((item) => {
+      if (item.id === e.target.parentNode.id) {
+        item.description = input.value
+      }
+      return item
+    })
+    setWorkArray({
+      workArray: newArray
+    })
+  }
+
+  useEffect(() => {
+    setEducationArray(educationArray.map((education) => ({...education, id: uuid()})))
+  }, [])
+
+  useEffect(() => {
+    setWorkArray(workArray.map((work) => ({...work, id: uuid()})))
+  }, [])
+  
+    if (edit) {
+      return (
+        <div className='template'>
+          <div className='header'>
+            <span>EZ CV</span>
+          </div>
+          <form onSubmit={swapToView}>
+            <div className='button'>
+            <button type="submit" id="submit">View</button>
+            </div>
+            <div className='information'>
+            <h2>Basic Information</h2>
+              <div className='row'>
+              <div className='columnone'>
+              <input type="text" placeholder="Full Name" name="name" defaultValue={profile.name} onChange={(e) => setProfile({...profile, name: e.target.value})}></input>
+              <input type="text" placeholder="Phone Number" name="number" defaultValue={profile.number} onChange={(e) => setProfile({...profile, number:e.target.value})}></input>
+              </div>
+              <div className='columntwo'>
+              <input type="text" placeholder="Email" name="email" defaultValue={profile.email} onChange={(e) => setProfile({...profile, email:e.target.value})}></input>
+              <input type="text" placeholder="Location" name="address" defaultValue={profile.address} onChange={(e) => setProfile({...profile, address:e.target.value})}></input>
+              </div>
+              </div>
+              <div id="boxes" className='box'>
+              <input type="text" placeholder="Website" name="website" maxLength="25" defaultValue={profile.website} onChange={(e) => setProfile({...profile, website:e.target.value})}></input>
+              </div>
+            </div>
+              <div className='information'>
+              <h2>Objective</h2>
+              <div id="boxes">
+              <textarea rows="4" placeholder="Objective statement" name="objective" defaultValue={profile.objective} onChange={(e) => setProfile({...profile, objective:e.target.value})}></textarea>
+              </div>
+              </div>
+            <div className='information'>
+            <h2>Work Experience</h2>
+            <div>
+            <button className='add' onClick={addToWork}>+</button>
+            </div>
+            {workArray.map(work => {
+        return (
+        <div key={work.id} id={work.id} className="information">
+            <div id={work.id}>
+                <button className="remove" onClick={removeFromWork}>-</button>
+            </div>
+            <div className="row">
+            <div className="columnone" id={work.id}>
+                <input type="text" placeholder="Role" name="role" defaultValue={work.role} onChange={handleChangeWorkRole}></input>
+                <input type="text" placeholder="Company" name="company" defaultValue={work.company} onChange={handleChangeWorkCompany}></input>
+            </div>
+            <div className="columntwo" id={work.id}>
+                <input type="text" placeholder="Duration" name="duration" defaultValue={work.duration} onChange={handleChangeWorkDuration}></input>
+                <input type="text" placeholder="Location" name="location" defaultValue={work.location} onChange={handleChangeWorkLocation}></input>
+            </div>
+            </div>
+            <div className="box" id={work.id}>
+                <textarea rows="5" placeholder="Description: Use enter key to create bullet points on display" name="description" defaultValue={work.description} id="work" onChange={handleChangeWorkDescription}></textarea>
+        </div>
+        </div>
+        )
+        }
+    )}
+            </div>
+            <div className='information'>
+            <h2>Education</h2>
+            <div>
+            <button className="add" onClick={addToEducation}>+</button>
+            </div>
+            {educationArray.map((education) => {
+        return (
+        <div key={education.id} id={education.id} className='information'>
+            <div id={education.id}>
+                <button className="remove" onClick={removeFromEducation}>-</button>
+            </div>
+            <div className="row">
+            <div className="columnone" id={education.id}>
+                <input type="text" placeholder="School" name="school" defaultValue={education.school} onChange={handleChangeEducationSchool}></input>
+                <input type="text" placeholder="Location" name="place" defaultValue={education.place} onChange={handleChangeEducationPlace}></input>
+            </div>
+            <div className="columntwo" id={education.id}>
+                <input type="text" placeholder="Duration" name="time" defaultValue={education.time} onChange={handleChangeEducationTime}></input>
+                <input type="text" placeholder="Degree" name="degree" defaultValue={education.degree} onChange={handleChangeEducationDegree}></input>
+            </div>
+            </div>
+            <div id={education.id}>
+                <textarea rows="2" placeholder="Achievements" name="achievement" defaultValue={education.achievement} onChange={handleChangeEducationAchievement}></textarea>
+        </div>
+        </div>
+        )
+    })}
+            </div>
+            <div className='information'>
+            <h2>Skills</h2>
+            <div className='box' id="boxes">
+              <input type="text" placeholder="Skills" name="skills" defaultValue={skill.skills} onChange={(e) => setSkill({...skill, skills:e.target.value})}></input>
+            </div>
+            </div>
+     
+            </form>
+          </div>
+      );
+    }
+    return (
+      <div>
+      <View
+      profile={profile}
+      workArray={workArray}
+      educationArray={educationArray}
+      skill={skill}
+      swapToEdit={swapToEdit}
+      />
+      </div>
+    )
+}
+
+/*
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -388,5 +736,6 @@ addToWork = (e) => {
     )
   }
 }
+*/
 
 export default App;
