@@ -109,9 +109,7 @@ const App = () => {
       }
       return item
     })
-    setWorkArray({
-      workArray: newArray
-    })
+    setWorkArray(newArray)
   }
 
   const handleChangeEducationTime = (e) => {
@@ -122,9 +120,7 @@ const App = () => {
       }
       return item
     })
-    setEducationArray({
-      educationArray: newArray
-    })
+    setEducationArray(newArray)
   }
 
   const handleChangeEducationDegree= (e) => {
@@ -135,9 +131,7 @@ const App = () => {
       }
       return item
     })
-    setEducationArray({
-      educationArray: newArray
-    })
+    setEducationArray(newArray)
   }
 
 
@@ -149,9 +143,7 @@ const App = () => {
       }
       return item
     })
-   setEducationArray({
-      educationArray: newArray
-    })
+   setEducationArray(newArray)
   }
 
   const handleChangeEducationPlace = (e) => {
@@ -162,9 +154,7 @@ const App = () => {
       }
       return item
     })
-    setEducationArray({
-      educationArray: newArray
-    })
+    setEducationArray(newArray)
   }
 
   const handleChangeEducationSchool = (e) => {
@@ -175,9 +165,7 @@ const App = () => {
       }
       return item
     })
-    setEducationArray({
-      educationArray: newArray
-    })
+    setEducationArray(newArray)
   }
 
   const handleChangeWorkRole = (e) => {
@@ -188,9 +176,7 @@ const App = () => {
       }
       return item
     })
-    setWorkArray({
-      workArray: newArray
-    })
+    setWorkArray(newArray)
   }
 
   const handleChangeWorkCompany = (e) => {
@@ -201,9 +187,7 @@ const App = () => {
       }
       return item
     })
-   setWorkArray({
-      workArray: newArray
-    })
+   setWorkArray(newArray)
   }
 
   const handleChangeWorkLocation = (e) => {
@@ -214,9 +198,7 @@ const App = () => {
       }
       return item
     })
-    setWorkArray({
-      workArray: newArray
-    })
+    setWorkArray(newArray)
   }
 
   const handleChangeWorkDescription = (e) => {
@@ -227,9 +209,7 @@ const App = () => {
       }
       return item
     })
-    setWorkArray({
-      workArray: newArray
-    })
+    setWorkArray(newArray)
   }
 
   useEffect(() => {
@@ -286,16 +266,16 @@ const App = () => {
             </div>
             <div className="row">
             <div className="columnone" id={work.id}>
-                <input type="text" placeholder="Role" name="role" defaultValue={work.role} onChange={(e) => setWork({...work, [e.target.name]: e.target.value})}></input>
-                <input type="text" placeholder="Company" name="company" defaultValue={work.company} onChange={(e) => setWork({...work, [e.target.name]: e.target.value})}></input>
+                <input type="text" placeholder="Role" name="role" defaultValue={work.role} onChange={handleChangeWorkRole}></input>
+                <input type="text" placeholder="Company" name="company" defaultValue={work.company} onChange={handleChangeWorkCompany}></input>
             </div>
             <div className="columntwo" id={work.id}>
-                <input type="text" placeholder="Duration" name="duration" defaultValue={work.duration} onChange={(e) => setWork({...work, [e.target.name]: e.target.value})}></input>
-                <input type="text" placeholder="Location" name="location" defaultValue={work.location} onChange={(e) => setWork({...work, [e.target.name]: e.target.value})}></input>
+                <input type="text" placeholder="Duration" name="duration" defaultValue={work.duration} onChange={handleChangeWorkDuration}></input>
+                <input type="text" placeholder="Location" name="location" defaultValue={work.location} onChange={handleChangeWorkLocation}></input>
             </div>
             </div>
             <div className="box" id={work.id}>
-                <textarea rows="5" placeholder="Description: Use enter key to create bullet points on display" name="description" defaultValue={work.description} id="work" onChange={(e) => setWork({...work, [e.target.name]: e.target.value})}></textarea>
+                <textarea rows="5" placeholder="Description: Use enter key to create bullet points on display" name="description" defaultValue={work.description} id="work" onChange={handleChangeWorkDescription}></textarea>
         </div>
         </div>
         )
@@ -315,16 +295,16 @@ const App = () => {
             </div>
             <div className="row">
             <div className="columnone" id={education.id}>
-                <input type="text" placeholder="School" name="school" defaultValue={education.school} onChange={(e) => setEducation({...education, [e.target.name] : e.target.value})}></input>
-                <input type="text" placeholder="Location" name="place" defaultValue={education.place} onChange={(e) => setEducation({...education, [e.target.name] : e.target.value})}></input>
+                <input type="text" placeholder="School" name="school" defaultValue={education.school} onChange={handleChangeEducationSchool}></input>
+                <input type="text" placeholder="Location" name="place" defaultValue={education.place} onChange={handleChangeEducationPlace}></input>
             </div>
             <div className="columntwo" id={education.id}>
-                <input type="text" placeholder="Duration" name="time" defaultValue={education.time} onChange={(e) => setEducation({...education, [e.target.name] : e.target.value})}></input>
-                <input type="text" placeholder="Degree" name="degree" defaultValue={education.degree} onChange={(e) => setEducation({...education, [e.target.name] : e.target.value})}></input>
+                <input type="text" placeholder="Duration" name="time" defaultValue={education.time} onChange={handleChangeEducationTime}></input>
+                <input type="text" placeholder="Degree" name="degree" defaultValue={education.degree} onChange={handleChangeEducationDegree}></input>
             </div>
             </div>
             <div id={education.id}>
-                <textarea rows="2" placeholder="Achievements" name="achievement" defaultValue={education.achievement} onChange={(e) => setEducation({...education, [e.target.name] : e.target.value})}></textarea>
+                <textarea rows="2" placeholder="Achievements" name="achievement" defaultValue={education.achievement} onChange={handleChangeEducationAchievement}></textarea>
         </div>
         </div>
         )
