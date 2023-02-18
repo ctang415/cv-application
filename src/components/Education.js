@@ -1,7 +1,7 @@
 import React from "react";
 
 const Education = ({removeFromEducation, educationArray, handleChangeEducationAchievement, handleChangeEducationDegree, handleChangeEducationPlace, handleChangeEducationSchool, handleChangeEducationTime}) => {
-        {educationArray.map((education) => {
+    {educationArray.map((education) => {
         return (
         <div key={education.id} id={education.id} className='information'>
             <div id={education.id}>

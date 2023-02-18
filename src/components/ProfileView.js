@@ -1,7 +1,7 @@
 import React from "react";
 
 const ProfileView = (props) => {
-    let {profile } = props
+    let {profile} = props
         return (
             <div>
             <div key={profile.id} id={profile.id}>

@@ -53,13 +53,12 @@ const App = () => {
     id: ''
   }])
 
-  const [skill, setSkill] = useState({
-    skills: '',
-  })
+  const [skill, setSkill] = useState('')
 
-  const [edit, setEdit] = useState({edit: true})
+  const [edit, setEdit] = useState(true)
 
-  const addToWork = () => {
+  const addToWork = (e) => {
+    e.preventDefault()
     setWorkArray(workArray => [...workArray, {
       role: '',
       company: '',
@@ -70,7 +69,8 @@ const App = () => {
     }])
   }
 
-  const addToEducation = () => {
+  const addToEducation = (e) => {
+    e.preventDefault()
     setEducationArray(educationArray => [...educationArray, {
       school: '',
       place: '',
@@ -93,12 +93,12 @@ const App = () => {
 
   const swapToView = (e) => {
     e.preventDefault()
-    setEdit({edit: false})
+    setEdit(false)
   }
 
   const swapToEdit = (e) => {
     e.preventDefault()
-    setEdit({edit: true})
+    setEdit(true)
   }
 
   const handleChangeWorkDuration = (e) => {
@@ -239,7 +239,8 @@ const App = () => {
   useEffect(() => {
     setWorkArray(workArray.map((work) => ({...work, id: uuid()})))
   }, [])
-  
+
+
     if (edit) {
       return (
         <div className='template'>
@@ -254,22 +255,22 @@ const App = () => {
             <h2>Basic Information</h2>
               <div className='row'>
               <div className='columnone'>
-              <input type="text" placeholder="Full Name" name="name" defaultValue={profile.name} onChange={(e) => setProfile({...profile, name: e.target.value})}></input>
-              <input type="text" placeholder="Phone Number" name="number" defaultValue={profile.number} onChange={(e) => setProfile({...profile, number:e.target.value})}></input>
+              <input type="text" placeholder="Full Name" name="name" defaultValue={profile.name} onChange={(e) => setProfile({...profile, [e.target.name]: e.target.value})}></input>
+              <input type="text" placeholder="Phone Number" name="number" defaultValue={profile.number} onChange={(e) => setProfile({...profile, number: e.target.value})}></input>
               </div>
               <div className='columntwo'>
-              <input type="text" placeholder="Email" name="email" defaultValue={profile.email} onChange={(e) => setProfile({...profile, email:e.target.value})}></input>
-              <input type="text" placeholder="Location" name="address" defaultValue={profile.address} onChange={(e) => setProfile({...profile, address:e.target.value})}></input>
+              <input type="text" placeholder="Email" name="email" defaultValue={profile.email} onChange={(e) => setProfile({...profile, [e.target.name]: e.target.value})}></input>
+              <input type="text" placeholder="Location" name="address" defaultValue={profile.address} onChange={(e) => setProfile({...profile, [e.target.name]: e.target.value})}></input>
               </div>
               </div>
               <div id="boxes" className='box'>
-              <input type="text" placeholder="Website" name="website" maxLength="25" defaultValue={profile.website} onChange={(e) => setProfile({...profile, website:e.target.value})}></input>
+              <input type="text" placeholder="Website" name="website" maxLength="25" defaultValue={profile.website} onChange={(e) => setProfile({...profile, [e.target.name]: e.target.value})}></input>
               </div>
             </div>
               <div className='information'>
               <h2>Objective</h2>
               <div id="boxes">
-              <textarea rows="4" placeholder="Objective statement" name="objective" defaultValue={profile.objective} onChange={(e) => setProfile({...profile, objective:e.target.value})}></textarea>
+              <textarea rows="4" placeholder="Objective statement" name="objective" defaultValue={profile.objective} onChange={(e) => setProfile({...profile, [e.target.name]: e.target.value})}></textarea>
               </div>
               </div>
             <div className='information'>
@@ -285,16 +286,16 @@ const App = () => {
             </div>
             <div className="row">
             <div className="columnone" id={work.id}>
-                <input type="text" placeholder="Role" name="role" defaultValue={work.role} onChange={handleChangeWorkRole}></input>
-                <input type="text" placeholder="Company" name="company" defaultValue={work.company} onChange={handleChangeWorkCompany}></input>
+                <input type="text" placeholder="Role" name="role" defaultValue={work.role} onChange={(e) => setWork({...work, [e.target.name]: e.target.value})}></input>
+                <input type="text" placeholder="Company" name="company" defaultValue={work.company} onChange={(e) => setWork({...work, [e.target.name]: e.target.value})}></input>
             </div>
             <div className="columntwo" id={work.id}>
-                <input type="text" placeholder="Duration" name="duration" defaultValue={work.duration} onChange={handleChangeWorkDuration}></input>
-                <input type="text" placeholder="Location" name="location" defaultValue={work.location} onChange={handleChangeWorkLocation}></input>
+                <input type="text" placeholder="Duration" name="duration" defaultValue={work.duration} onChange={(e) => setWork({...work, [e.target.name]: e.target.value})}></input>
+                <input type="text" placeholder="Location" name="location" defaultValue={work.location} onChange={(e) => setWork({...work, [e.target.name]: e.target.value})}></input>
             </div>
             </div>
             <div className="box" id={work.id}>
-                <textarea rows="5" placeholder="Description: Use enter key to create bullet points on display" name="description" defaultValue={work.description} id="work" onChange={handleChangeWorkDescription}></textarea>
+                <textarea rows="5" placeholder="Description: Use enter key to create bullet points on display" name="description" defaultValue={work.description} id="work" onChange={(e) => setWork({...work, [e.target.name]: e.target.value})}></textarea>
         </div>
         </div>
         )
@@ -314,16 +315,16 @@ const App = () => {
             </div>
             <div className="row">
             <div className="columnone" id={education.id}>
-                <input type="text" placeholder="School" name="school" defaultValue={education.school} onChange={handleChangeEducationSchool}></input>
-                <input type="text" placeholder="Location" name="place" defaultValue={education.place} onChange={handleChangeEducationPlace}></input>
+                <input type="text" placeholder="School" name="school" defaultValue={education.school} onChange={(e) => setEducation({...education, [e.target.name] : e.target.value})}></input>
+                <input type="text" placeholder="Location" name="place" defaultValue={education.place} onChange={(e) => setEducation({...education, [e.target.name] : e.target.value})}></input>
             </div>
             <div className="columntwo" id={education.id}>
-                <input type="text" placeholder="Duration" name="time" defaultValue={education.time} onChange={handleChangeEducationTime}></input>
-                <input type="text" placeholder="Degree" name="degree" defaultValue={education.degree} onChange={handleChangeEducationDegree}></input>
+                <input type="text" placeholder="Duration" name="time" defaultValue={education.time} onChange={(e) => setEducation({...education, [e.target.name] : e.target.value})}></input>
+                <input type="text" placeholder="Degree" name="degree" defaultValue={education.degree} onChange={(e) => setEducation({...education, [e.target.name] : e.target.value})}></input>
             </div>
             </div>
             <div id={education.id}>
-                <textarea rows="2" placeholder="Achievements" name="achievement" defaultValue={education.achievement} onChange={handleChangeEducationAchievement}></textarea>
+                <textarea rows="2" placeholder="Achievements" name="achievement" defaultValue={education.achievement} onChange={(e) => setEducation({...education, [e.target.name] : e.target.value})}></textarea>
         </div>
         </div>
         )
@@ -332,7 +333,7 @@ const App = () => {
             <div className='information'>
             <h2>Skills</h2>
             <div className='box' id="boxes">
-              <input type="text" placeholder="Skills" name="skills" defaultValue={skill.skills} onChange={(e) => setSkill({...skill, skills:e.target.value})}></input>
+              <input type="text" placeholder="Skills" name="skills" defaultValue={skill} onChange={(e) => setSkill(e.target.value)}></input>
             </div>
             </div>
      
